@@ -1,4 +1,4 @@
-package dev.registration;
+package dev.server.registration;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

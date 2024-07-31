@@ -1,4 +1,4 @@
-package dev.config;
+package dev.server.config;
 
 import java.io.IOException;
 

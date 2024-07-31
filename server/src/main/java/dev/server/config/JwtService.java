@@ -1,4 +1,4 @@
-package dev.config;
+package dev.server.config;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package dev.registration;
+package dev.server.registration;
 
 public class RegisterService {
 
