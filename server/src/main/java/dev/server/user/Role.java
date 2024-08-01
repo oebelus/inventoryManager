@@ -1,6 +1,6 @@
 package dev.server.user;
 
-public enum AppUserRole {
+public enum Role {
     USER,
     ADMIN
 }

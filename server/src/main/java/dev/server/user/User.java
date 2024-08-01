@@ -15,6 +15,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,7 +28,9 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@Builder
 @Entity // hibernate
 @Data
 @Table(name = "USER")
@@ -41,26 +45,27 @@ public class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
+    private Role role;
 
     @Enumerated(EnumType.STRING)
-    private AppUserRole appUserRole;
+    private Role Role;
     private Boolean logged;
     private Boolean enabled;
 
-    public User(String email, String password, String firstName, String lastName, AppUserRole appUserRole,
+    public User(String email, String password, String firstName, String lastName, Role Role,
             Boolean logged, Boolean enabled) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.appUserRole = appUserRole;
+        this.Role = Role;
         this.logged = logged;
         this.enabled = enabled;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(Role.name());
         return Collections.singletonList(authority);
     }
 
