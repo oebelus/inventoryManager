@@ -1,8 +1,11 @@
 package dev.server.registration;
 
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class RegisterService {
 
-    public String register(RegisterRequest request) {
+    String register(RegisterRequest request) {
         return "works!";
     }
 }

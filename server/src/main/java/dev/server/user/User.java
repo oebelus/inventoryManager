@@ -2,18 +2,20 @@ package dev.server.user;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,45 +35,44 @@ import lombok.ToString;
 @Builder
 @Entity // hibernate
 @Data
-@Table(name = "USER")
+@Table(name = "user")
 public class User implements UserDetails {
 
-    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private Role role;
 
     @Enumerated(EnumType.STRING)
-    private Role Role;
+    private Role role;
     private Boolean logged;
-    private Boolean enabled;
 
-    public User(String email, String password, String firstName, String lastName, Role Role,
-            Boolean logged, Boolean enabled) {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
+
+    public User(String email, String password, String firstName, String lastName, Role role,
+            Boolean logged) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.Role = Role;
+        this.role = role;
         this.logged = logged;
-        this.enabled = enabled;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(Role.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
         return Collections.singletonList(authority);
     }
 
     @Override
     public String getUsername() {
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return this.email;
     }
 
     public boolean isAccountNonExpired() {
@@ -82,7 +83,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public boolean isEnabled() {
-        return true;
-    }
 }

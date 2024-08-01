@@ -50,6 +50,8 @@ public class UserService implements UserDetailsService { // it should be instant
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
 		newUser.setPassword(password);
+		newUser.setLogged(true);
+		newUser.setRole(Role.USER);
 
 		return userRepository.save(newUser);
 	}
