@@ -39,17 +39,7 @@ export default function EditItem({edit, closeEdit, item}: EditItemProps) {
         })
         .catch((err) => toast.error(getError(err as ApiError)))
     }
-
-    const handleDelete = () => {
-        axios.delete(`http://localhost:4000/budgets/deleteBudget/${(user as User).id}/${item.id}`)
-        .then(() => {
-          toast("Budget Deleted Successfully!")
-          //dispatch({type: 'DELETE_BUDGET', payload: budget!._id!})
-          closeEdit()
-        })
-        .catch((err) => getError(err as ApiError));
-    }
-
+    
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputDate = new Date(e.target.value);
         if (!isNaN(inputDate.getTime())) {

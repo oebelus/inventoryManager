@@ -124,37 +124,3 @@ export const feedback = [
     title: "Meal Prepper",
   }
 ];
-
-
-export const sidebar = [
-    {
-        id: "deployed_code",
-        icon: "deployed_code",
-        link: "deployed"
-    },
-    {
-        id: "house",
-        icon: "house",
-        link: "dashboard"
-    },
-    {
-        id: "description",
-        icon: "description",
-        link: "lessons"
-    },
-    {
-        id: "generate",
-        icon: "cycle",
-        link: "generate"
-    },
-    {
-        id: "bar_chart",
-        icon: "bar_chart",
-        link: "statistics"
-    },
-    {
-        id: "settings",
-        icon: "settings",
-        link: "settings"
-    },
-]

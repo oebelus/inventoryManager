@@ -1,8 +1,6 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../../types/product";
-import { initialState, reducer } from "../../utils/store";
 import ItemsTable from "./ItemsTable";
-import { User } from "../../types/User";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
 
@@ -16,9 +14,9 @@ export default function Items({ items }: ItemsProps) {
 
     const [item, setItem] = useState<Product>()
 
-    const [filteredCategory, setFilteredCategory] = useState("")
-    const [filteredData, setFilteredData] = useState<Product[]>([])
-    const [sumOfNegatives, setSumOfNegatives] = useState(0)
+    // const [filteredCategory, setFilteredCategory] = useState("")
+    // const [filteredData, setFilteredData] = useState<Product[]>([])
+    // const [sumOfNegatives, setSumOfNegatives] = useState(0)
     const [sumOfPositives, setSumOfPositives] = useState(0)
 
     const minDate = new Date(new Date().setDate(1))
@@ -28,9 +26,6 @@ export default function Items({ items }: ItemsProps) {
     // const [max, setMax] = useState<Date>(new Date())
 
     const [prompt, setPrompt] = useState<Product['name']>("")
-    
-    const [state, dispatch] = useReducer(reducer, initialState)
-    const user = state.user as User
 
     useEffect(() => {
 
@@ -77,12 +72,12 @@ export default function Items({ items }: ItemsProps) {
         setDel(false)
     }
 
-    function viewAll() {
-        setFilteredCategory("")
-        setPrompt("")
-        // setMin(minDate)
-        // setMax(new Date())
-    }
+    // function viewAll() {
+    //     setFilteredCategory("")
+    //     setPrompt("")
+    //     // setMin(minDate)
+    //     // setMax(new Date())
+    // }
 
     return (
         <div>

@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react';
 
 interface CardDataStatsProps {
   title: string;
-  total: string;
-  rate: string;
+  total: number;
+  rate?: number;
   levelUp?: boolean;
   levelDown?: boolean;
   children: ReactNode;
@@ -36,7 +36,7 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
             levelUp && 'text-meta-3'
           } ${levelDown && 'text-meta-5'} `}
         >
-          {rate}
+          {rate ? rate.toFixed(2) + "%" : rate}
 
           {levelUp && (
             <svg

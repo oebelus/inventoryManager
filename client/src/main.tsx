@@ -15,7 +15,6 @@ import ProtectedRoute from './ProtectedRoute';
 import Home from './pages/Home';
 import './css/style.css';
 import './css/satoshi.css';
-import 'jsvectormap/dist/css/jsvectormap.css';
 import 'flatpickr/dist/flatpickr.min.css';
 import Dashboard from './pages/Dashboard';
 import PublicRoute from './PublicRoute';

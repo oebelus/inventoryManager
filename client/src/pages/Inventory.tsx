@@ -24,7 +24,7 @@ export default function Inventory() {
                 dispatch({type: 'FETCH_ITEMS', payload: response.data})
             })
             .catch((err) => getError(err as ApiError))
-    }, [add])
+    }, [])
 
     const closeAdd = () => {
         setAdd(false)
