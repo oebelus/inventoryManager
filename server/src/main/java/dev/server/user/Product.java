@@ -32,9 +32,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate expiryDate;
-    private Integer number;
+    private LocalDate expiration;
+    private Integer count;
 
     @ManyToOne
-    private dev.server.user.User user;
+    private User user;
 }

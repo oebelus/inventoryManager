@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -43,6 +45,8 @@ public class User implements UserDetails {
     private Long id;
 
     private String email;
+
+    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
@@ -53,16 +57,6 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
-
-    public User(String email, String password, String firstName, String lastName, Role role,
-            Boolean logged) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.logged = logged;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

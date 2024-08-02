@@ -44,6 +44,14 @@ public class JwtService {
                 .compact();
     }
 
+    public String createToken(UserDetails userDetails, String firstName, String lastName) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("firstName", firstName);
+        claims.put("lastName", lastName);
+
+        return generateToken(claims, userDetails);
+    }
+
     private Claims extractAllClaims(String token) { // payload
         return Jwts
                 .parserBuilder()

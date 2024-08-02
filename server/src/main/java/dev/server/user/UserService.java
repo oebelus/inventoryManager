@@ -16,9 +16,8 @@ public class UserService implements UserDetailsService { // it should be instant
 	@Autowired
 	private UserRepository userRepository;
 
-	public User createUser(User user) {
-		return userRepository.save(user);
-	}
+	@Autowired
+	private ProductRepository productRepository;
 
 	public User getuser(String email) {
 		return userRepository.findByEmail(email).orElse(null);
@@ -33,27 +32,18 @@ public class UserService implements UserDetailsService { // it should be instant
 		userRepository.deleteById(id);
 	}
 
-	public User login(String email, String password) {
-		User user = userRepository.findByEmail(email).orElse(null);
-		if (user != null && user.getPassword().equals(password))
-			return user;
-		return null;
-	}
-
-	public User register(String email, String firstName, String lastName, String password) {
-		if (userRepository.existsByEmail(email)) {
-			throw new RuntimeException("User already exists with this email");
-		}
-
-		User newUser = new User();
-		newUser.setEmail(email);
-		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
-		newUser.setPassword(password);
-		newUser.setLogged(true);
-		newUser.setRole(Role.USER);
-
-		return userRepository.save(newUser);
+	public Product addProduct(ProductDTO productDTO) {
+		User user = userRepository.findById(productDTO.getUserId()).orElseThrow();
+		Product product = Product.builder()
+				.expiration(productDTO.getExpiration())
+				.count(productDTO.getCount())
+				.user(user)
+				.build();
+		user.getProducts().add(product);
+		System.out.println(product);
+		return product;
+		// userRepository.save(user);
+		// return productRepository.save(product);
 	}
 
 	@Override
