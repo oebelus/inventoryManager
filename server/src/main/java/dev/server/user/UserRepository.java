@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import jakarta.transaction.Transactional;
 
 @Repository
-@Transactional /* (readOnly = true) */
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
+
     Optional<User> findByEmail(String email);
 
     Boolean existsByEmail(String email);

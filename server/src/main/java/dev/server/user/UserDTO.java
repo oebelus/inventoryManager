@@ -2,6 +2,7 @@ package dev.server.user;
 
 import java.util.List;
 
+import dev.server.item.Product;
 import lombok.Getter;
 import lombok.Setter;
 

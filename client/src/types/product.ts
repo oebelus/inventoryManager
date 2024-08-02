@@ -1,6 +1,7 @@
 export type Product = {
-  id: string,
+  id?: string,
   name: string,
   count: number,
   expiration: string,
+  category: string
 };

@@ -2,10 +2,10 @@ import { useReducer, useState } from "react";
 import { initialState, reducer } from "../../utils/store";
 import { Product } from "../../types/product";
 import axios from "axios";
-import { User } from "../../types/User";
 import { toast } from "react-toastify";
 import { getError } from "../../utils/api";
 import { ApiError } from "../../types/ApiError";
+import { User } from "../../types/User";
 
 interface AddItemProps {
     add: boolean;
@@ -15,20 +15,24 @@ interface AddItemProps {
 export default function AddItem({ add, closeAdd }: AddItemProps) {
     const [count, setCount] = useState<Product["count"]>(0);
     const [name, setName] = useState<Product["name"]>("");
-    const [expiration, setExpiration] = useState<Product["expiration"]>();
+    const [expiration, setExpiration] = useState<Product["expiration"]>("");
+    const [category, setCategory] = useState<Product["category"]>("");
 
-    const [state, ] = useReducer(reducer, initialState);
-    const user = state.user;
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const user = state.user as User;
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        const product: Product = {count, name, expiration, category};
 
-        axios.post(`http://localhost:8080/api/user/addItem/${(user as User).id}`, {
+        axios.post(`http://localhost:8080/api/item`, {
             count: count,
             name: name,
             expiration: expiration,
-        }).then((response) => {
-            console.log(response)
+            category: category,
+            user: { id: user.id }
+        }).then(() => {
+            dispatch({type: 'ADD_ITEM', payload: product})
             toast.success("Item Added Successfully!");
             closeAdd();
         })
@@ -45,15 +49,19 @@ export default function AddItem({ add, closeAdd }: AddItemProps) {
                 <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                     <div className="col-span-full sm:col-span-3">
                         <label htmlFor="name" className="text-sm mb-2">Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)} id="name" type="text" placeholder="Name" className="mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" />
+                        <input value={name} onChange={(e) => setName(e.target.value)} id="name" type="text" placeholder="Name" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" />
                     </div>
                     <div className="col-span-full sm:col-span-3">
                         <label htmlFor="amount" className="text-sm mb-2">Amount</label>
-                        <input value={count} onChange={(e) => setCount(parseInt(e.target.value))} id="amount" type="number" placeholder="Amount" className="mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" required />
+                        <input value={count} onChange={(e) => setCount(parseInt(e.target.value))} id="amount" type="number" placeholder="Amount" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" required />
                     </div>
                     <div className="col-span-full sm:col-span-3 mb-2">
                         <label htmlFor="category" className="text-sm mb-2">Expiration Date</label>
-                        <input value={expiration} onChange={(e) => setExpiration(e.target.value)} id="category" type="date" placeholder="Category" className="mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" required />
+                        <input value={expiration} onChange={(e) => setExpiration(e.target.value)} id="category" type="date" placeholder="Category" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" required />
+                    </div>
+                    <div className="col-span-full sm:col-span-3">
+                        <label htmlFor="amount" className="text-sm mb-2">Category</label>
+                        <input value={category} onChange={(e) => setCategory(e.target.value)} id="amount" type="text" placeholder="Category" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" required />
                     </div>
                 </div>
                 <button onClick={handleSubmit} type="submit" style={{ width: "90%" }} className="px-4 py-2 border rounded-md dark:border-gray-100">Add</button>
