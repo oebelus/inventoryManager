@@ -3,5 +3,6 @@ export type Product = {
   name: string,
   count: number,
   expiration: string,
-  category: string
+  category: string,
+  unit: string
 };

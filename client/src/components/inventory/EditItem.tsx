@@ -19,6 +19,7 @@ export default function EditItem({edit, closeEdit, item}: EditItemProps) {
     const [name, setName] = useState<Product["name"]>(item.name)
     const [expiration, setExpiration] = useState<Date>(new Date(item.expiration))
     const [category, setCategory] = useState<Product["category"]>(item.category)
+    const [unit, setUnit] = useState<Product["unit"]>(item.unit);
     
     const [state, ] = useReducer(reducer, initialState)
     
@@ -29,8 +30,9 @@ export default function EditItem({edit, closeEdit, item}: EditItemProps) {
         axios.put(`http://localhost:8080/api/item/edit/${(user as User).id}/${item.id}`, {
               count: count,
               name: name,
-              expiration: expiration.toString(),
-              category: category
+              expiration: expiration,
+              category: category,
+              unit: unit
         })
         .then(() => {
            toast.success("Budget Edited Successfully")
@@ -67,9 +69,15 @@ export default function EditItem({edit, closeEdit, item}: EditItemProps) {
                             <label htmlFor="name" className="text-sm mb-2">Name</label>
                             <input value={name} onChange={(e) => setName(e.target.value)} id="name" type="text" placeholder="Name" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" />
                         </div>
-                        <div className="col-span-full sm:col-span-3">
-                            <label htmlFor="amount" className="text-sm mb-2">Amount</label>
-                            <input value={count} onChange={(e) => setCount(parseInt(e.target.value))} id="amount" type="number" placeholder="Amount" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" required />
+                        <div className="col-span-full sm:col-span-3 grid grid-cols-2 gap-4">
+                            <div>
+                                <label htmlFor="amount" className="text-sm mb-2">Amount</label>
+                                <input value={count} onChange={(e) => setCount(parseInt(e.target.value))} id="amount" type="number" placeholder="Amount" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ring-indigo-500 dark:border-gray-700 dark:text-gray-900" required />
+                            </div>
+                            <div>
+                                <label htmlFor="unit" className="text-sm mb-2">Unit</label>
+                                <input value={unit} onChange={(e) => setUnit(e.target.value)} id="unit" type="text" placeholder="Unit" className="text-black mt-2 p-2 w-full rounded-md focus:ring focus:ring-indigo-500 dark:border-gray-700 dark:text-gray-900" />
+                            </div>
                         </div>
                         <div className="col-span-full sm:col-span-3 mb-2">
                             <label htmlFor="category" className="text-sm mb-2">Expiration Date</label>

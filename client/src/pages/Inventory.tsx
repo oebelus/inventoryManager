@@ -11,6 +11,7 @@ import { Product } from "../types/product"
 export default function Inventory() {
     const [state, dispatch] = useReducer(reducer, initialState)
     const user = state.user as User
+    const products = state.products
 
     const [add, setAdd] = useState<boolean>(false)
 
@@ -25,6 +26,10 @@ export default function Inventory() {
             })
             .catch((err) => getError(err as ApiError))
     }, [])
+
+    useEffect(() => {
+        setItems(products);
+    }, [products]);
 
     const closeAdd = () => {
         setAdd(false)

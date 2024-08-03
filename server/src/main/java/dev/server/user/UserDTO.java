@@ -18,7 +18,6 @@ public class UserDTO {
         UserDTO userDTO = new UserDTO();
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
-        userDTO.setProducts(user.getProducts());
         userDTO.setId(user.getId());
         return userDTO;
     }

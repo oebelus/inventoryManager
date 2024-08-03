@@ -21,7 +21,7 @@ const ItemsHistory = ({items}: HistoryProps) => {
                 <h2 className="font-semibold">{product.name}</h2>
                 <div className="flex gap-6">
                   <span className="text-sm dark:text-gray-400">{format(new Date(product.expiration))}</span>
-                  <span className="text-sm dark:text-gray-400">{product.count} items</span>
+                  <span className="text-sm dark:text-gray-400">{product.count} {product.unit ? product.unit : "items"}</span>
                 </div>
               </div>
             </div>

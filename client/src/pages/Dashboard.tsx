@@ -67,16 +67,16 @@ const Dashboard = () => {
     },
     {
       title: "Expired",
-      number: items.filter(item => new Date(item.expiration) > new Date()).length,
+      number: items.filter(item => new Date(item.expiration) < new Date()).length,
       icon: "close",
-      rate: items.filter(item => new Date(item.expiration) > new Date()).length / items.length * 100,
+      rate: items.filter(item => new Date(item.expiration) < new Date()).length / items.length * 100,
       color: "text-red-400"
     },
     {
       title: "Not Expired",
-      number: items.filter(item => new Date(item.expiration) < new Date()).length,
+      number: items.filter(item => new Date(item.expiration) > new Date()).length,
       icon: "check",
-      rate: items.filter(item => new Date(item.expiration) < new Date()).length / items.length * 100,
+      rate: items.filter(item => new Date(item.expiration) > new Date()).length / items.length * 100,
       color: "text-green-700"
     },
     {
@@ -107,7 +107,7 @@ const Dashboard = () => {
         <CategoriesChart items={items} />
         <Expiration expired={expired} expiringSoon={expiringSoon} />
         <div className="col-span-12">
-          <ItemsHistory items={items} />
+          <ItemsHistory items={items.slice(Math.max(items.length - 5, 0)).reverse()} />
         </div>
       </div>
     </>

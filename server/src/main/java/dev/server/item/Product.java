@@ -39,6 +39,7 @@ public class Product {
     private String name;
     private Integer count;
     private String category;
+    private String unit;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

@@ -1,8 +1,8 @@
 import { MouseEvent, useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import SignupImage from '../../svg/SignupImage';
 import axios from 'axios';
 import { initialState, reducer } from '../../utils/store';
+import SignupImage from '../../images/icon/SignupImage';
 
 const SignIn = () => {
   const [email, setEmail] = useState("")
