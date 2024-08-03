@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ItemService {
-
     @Autowired
     private final ItemRepository itemRepository;
 
