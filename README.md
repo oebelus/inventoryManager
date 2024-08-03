@@ -9,7 +9,6 @@ Meet the Inventory Management App – your go-to tool for keeping your product i
 - **Product Management:** Add, update, and delete products.
 - **Inventory Tracking:** Monitor product counts and expiration dates.
 - **Category Filtering:** Filter products by categories with case-insensitive search.
-- **Dynamic Grid Layout:** The grid layout ensures that the last element covers the full width of the container, matching the width of the sum of the elements above.
 
 ## Technologies
 
