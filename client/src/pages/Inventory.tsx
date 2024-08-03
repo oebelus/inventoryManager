@@ -4,9 +4,8 @@ import axios from "axios"
 import { User } from "../types/User"
 import { getError } from "../utils/api"
 import { ApiError } from "../types/ApiError"
-import AddItem from "../components/inventory/AddItem"
-import Items from "../components/inventory/Items"
-import { Product } from "../types/product"
+import AddItem from "../components/Inventory/AddItem"
+import Items from "../components/Inventory/Items"
 
 export default function Inventory() {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -15,22 +14,14 @@ export default function Inventory() {
 
     const [add, setAdd] = useState<boolean>(false)
 
-    const [items, setItems] = useState<Product[]>([])
-
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/${user.id}`)
             .then((response) => {
-                console.log(response.data)
-                setItems(response.data)
                 dispatch({type: 'FETCH_ITEMS', payload: response.data})
             })
             .catch((err) => getError(err as ApiError))
-    }, [])
-
-    useEffect(() => {
-        setItems(products);
-    }, [products]);
-
+    }, [products])
+    
     const closeAdd = () => {
         setAdd(false)
     }
@@ -51,7 +42,7 @@ export default function Inventory() {
             <span>Add an Item</span>
         </button>
         {<AddItem add={add} closeAdd={closeAdd} />}
-        <Items items={items}/>
+        <Items items={products}/>
         </div>
     )
 }

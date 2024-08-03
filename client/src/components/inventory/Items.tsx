@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../types/product";
-import ItemsTable from "./ItemsTable";
-import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
+import DeleteItem from "./DeleteItem";
+import ItemsTable from "./ItemsTable";
 
 interface ItemsProps {
     items: Product[];
