@@ -21,7 +21,7 @@ export default function DeleteItem({ del, closeDel, item }: DeleteItemProps) {
     const deleteTx = async () => {
         try {
             await axios.delete(`http://localhost:8080/api/item/delete/${user.id}/${item.id}`);
-            dispatch({ type: "DELETE_ITEM", payload: item.id! });
+            dispatch({ type: "DELETE_ITEM", payload: item });
             toast.success("Transaction Deleted Successfully");
             closeDel();
         } catch (err) {

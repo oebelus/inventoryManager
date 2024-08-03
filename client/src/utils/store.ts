@@ -22,7 +22,7 @@ export type Action =
     | { type: 'USER_SIGNOUT' }
     | { type: 'ADD_ITEM', payload: Product }
     | { type: 'FETCH_ITEMS', payload: Product[] }
-    | { type: 'DELETE_ITEM', payload: string }
+    | { type: 'DELETE_ITEM', payload: Product }
 
 export function reducer(state: AppState, action: Action): AppState {
     switch (action.type) {
@@ -40,7 +40,7 @@ export function reducer(state: AppState, action: Action): AppState {
         case 'DELETE_ITEM':
             return { 
                 ...state, 
-                products: state.products.filter(product => product.id != action.payload)     
+                products: state.products.filter(product => product != action.payload)     
             }
         default:
             return state
