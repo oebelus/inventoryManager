@@ -4,6 +4,8 @@
 
 Meet the Inventory Management App – your go-to tool for keeping your product inventory in check! With an easy-to-use interface, you can track, filter, and organize your products effortlessly. Built with modern tech to keep things smooth and up-to-date.
 
+- YouTube video demo link: https://youtu.be/mrS1Cxl2RDE
+
 ## Features
 
 - **Product Management:** Add, update, and delete products.
